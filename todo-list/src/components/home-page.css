@@ -1,0 +1,15 @@
+.homepage{
+    text-align: center;
+}
+
+.title-homepage h1{
+    color:#ffdfdb;
+    font-size: 50px;
+    
+}
+
+.form-homepage{
+    display: flex;
+}
+
+
