@@ -1,0 +1,18 @@
+.form-container {
+    max-width: 400px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .form-container > * {
+    margin-bottom: 15px;
+  }
+  
+  .form-container button {
+    display: block;
+    margin: auto;
+  }
+
