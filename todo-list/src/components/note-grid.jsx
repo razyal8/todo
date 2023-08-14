@@ -1,5 +1,5 @@
 import React from 'react';
-import './note-grid.css'
+import '../assets/note-grid.css'
 import { Chip,Typography,CardContent,Card ,IconButton } from '@material-ui/core';
 import DoneSharpIcon from '@material-ui/icons/DoneSharp';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -16,7 +16,8 @@ function NoteCard({ taskName, subject, priority, Description, Date}) {
   }
 
   const editTask = () => {
-    navigate('/')
+    //not-implemented
+    navigate('/tasks',{state:{}})
   }
   
   return (
