@@ -3,12 +3,14 @@ import {useState} from 'react';
 import { Typography,TextField,Button,MenuItem} from '@material-ui/core';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../assets/task-form.css';
+import { v4 as uuidv4 } from 'uuid';
 
 
 export default function TaskForm() {
   const navigate = useNavigate();
   const { state } = useLocation();
   const [formState, setFormState] = useState({
+    id: uuidv4(),
     taskInput: state.taskName,
     descriptionInput: '',
     subjectInput: '',
@@ -16,6 +18,9 @@ export default function TaskForm() {
     dateInput: '2017-05-24T10:30',
   });
   const [priorityInput, setPriorityInput] = useState('');
+
+
+
 
   const subjects = ['coding', 'Math', 'Sport'];
 
@@ -64,7 +69,7 @@ export default function TaskForm() {
         variant="outlined"
         margin="normal"
         multiline
-        rows={4}
+        minRows={4}
       />
       <TextField
         select
