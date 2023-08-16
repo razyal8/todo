@@ -6,13 +6,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import EditIcon from '@material-ui/icons/Edit';
 import { useNavigate } from 'react-router-dom';
 
-function NoteCard({ id, taskName, subject, priority, Description, Date}) {
+function NoteCard({ id, taskName, subject, priority, Description, Date, onDelete}) {
   const navigate = useNavigate();
   const [selected, setSelected] = React.useState(false);
 
-  const deleteTask = () => {
-    console.log(`key:${taskName} and ${id} delete`)
-    sessionStorage.removeItem(`storedState_${id}`)
+  const handleDelete = () =>{
+    onDelete(id)
   }
 
   const editTask = () => {
@@ -44,7 +43,7 @@ function NoteCard({ id, taskName, subject, priority, Description, Date}) {
           label={selected ? "Completed" : "Doing"}
           deleteIcon={<DoneSharpIcon />}
         />
-        <IconButton aria-label="delete" onClick={deleteTask}>
+        <IconButton aria-label="delete" onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>
         <IconButton aria-label="delete" onClick={editTask}>

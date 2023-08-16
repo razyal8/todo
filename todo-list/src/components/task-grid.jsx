@@ -1,26 +1,44 @@
 import * as React from 'react';
 import NoteCard from './note-grid';
 import { Grid } from '@material-ui/core';
-import { useLocation } from 'react-router-dom'
-import { useState } from 'react'
+import { useLocation , useNavigate} from 'react-router-dom'
+import { useState, useEffect  } from 'react'
 
-function NoteGrid() {
-  const { state }  = useLocation();
 
+const getStoredStates = () =>{
   let keys = Object.keys(sessionStorage);
   const storedStates = [];
-  for (let key of keys) {
+  keys.forEach(key => {
     storedStates.push(JSON.parse(sessionStorage.getItem(key)));
-  }
+  });
 
+  return storedStates
+}
+
+function NoteGrid() {
+  const navigate = useNavigate();
+  const { state }  = useLocation();
+ 
+  const storedStates = getStoredStates()
   const [items, setItems] = useState(storedStates);
-  const isNewState = !storedStates.some(state_a => JSON.stringify(state_a) === JSON.stringify(state));
 
-  if (isNewState) {
-    const newStates = [...storedStates, state];
-    setItems(newStates);
-    sessionStorage.setItem(`storedState_${state.id}`, JSON.stringify(state));
-  }
+  useEffect(() => {
+    const isNewState = !storedStates.some(state_a => JSON.stringify(state_a) === JSON.stringify(state));
+    if (isNewState && state) {
+      const newStates = [...storedStates, state];
+      setItems(newStates);
+      sessionStorage.setItem(`storedState_${state.id}`, JSON.stringify(state));
+    }
+  }, [state, storedStates]);
+
+  const handleDelete = (id) => {
+    sessionStorage.removeItem(`storedState_${id}`);
+    const updatedItems = items.filter(item => item.id !== id);
+    setItems(updatedItems);
+    // to remove the first state it's working becouse i add it to sessionStorage
+    navigate({ ...navigate.location,  state: undefined }); 
+  };
+
   return (
     <Grid container spacing={2}> {
       items.map((item) => (
@@ -28,10 +46,11 @@ function NoteGrid() {
           <NoteCard
             id={item.id}
             taskName={item.taskInput}
-            subject={item.subjectInput}
+            subject={item.subjectInput} 
             priority={item.priorityInput}
             Description={item.descriptionInput}
             Date={item.dateInput}
+            onDelete={handleDelete}
           />
         </Grid>
       ))}
