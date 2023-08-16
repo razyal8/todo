@@ -13,12 +13,17 @@ function Homepage() {
     if (inputRef.current) {
       inputRef.current.focus();
     }
-    navigation('/tasks',{state:{taskName:taskName}});
+    navigation('/tasks', {
+      state: {
+        taskName:taskName,
+        newTask: true,
+      }
+    });
+
   }
 
   const handleNewTaskName = (event) =>{
     setTaskName(event.target.value)
-    console.log(taskName)
   }
 
   return (

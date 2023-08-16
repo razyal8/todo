@@ -23,10 +23,17 @@ function NoteGrid() {
   const [items, setItems] = useState(storedStates);
 
   useEffect(() => {
-    const isNewState = !storedStates.some(state_a => JSON.stringify(state_a) === JSON.stringify(state));
-    if (isNewState && state) {
-      const newStates = [...storedStates, state];
-      setItems(newStates);
+    setItems(getStoredStates());
+  }, [state]);
+
+  useEffect(() => {
+    const isUpdatedState = !storedStates.some(state_a => JSON.stringify(state_a) === JSON.stringify(state));
+    if (isUpdatedState && state) {
+      const isNewState = !storedStates.some(state_a => JSON.stringify(state_a.id) === JSON.stringify(state.id));
+      if(isNewState){
+        const newStates = [...storedStates, state];
+        setItems(newStates);
+      }
       sessionStorage.setItem(`storedState_${state.id}`, JSON.stringify(state));
     }
   }, [state, storedStates]);

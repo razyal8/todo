@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import { Typography,TextField,Button,MenuItem} from '@material-ui/core';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../assets/task-form.css';
@@ -9,20 +9,28 @@ import { v4 as uuidv4 } from 'uuid';
 export default function TaskForm() {
   const navigate = useNavigate();
   const { state } = useLocation();
+  const subjects = ['coding', 'Math', 'Sport'];
   const [formState, setFormState] = useState({
-    id: uuidv4(),
+    id: state.id || uuidv4(),
     taskInput: state.taskName,
-    descriptionInput: '',
-    subjectInput: '',
-    priorityInput: '',
-    dateInput: '2017-05-24T10:30',
+    descriptionInput: state.description,
+    subjectInput: state.subject,
+    priorityInput: state.priority,
+    dateInput: state.date,
+    newTask: state.newTask
   });
   const [priorityInput, setPriorityInput] = useState('');
+  const [visibleAdd, setVisible]= useState(true)
 
+  useEffect(() => {
+    setVisible(state.newTask); 
+  }, [state.newTask, visibleAdd]);
 
-
-
-  const subjects = ['coding', 'Math', 'Sport'];
+  useEffect(() => {
+    if (state) {
+      setPriorityInput(state.priority);
+    }
+  }, [state]);
 
   const handlePriorityChange = (event) => {
     const value = event.target.value;
@@ -32,9 +40,15 @@ export default function TaskForm() {
     }
   };
 
-  const addNewTask = () =>{
-    navigate('/notes',{state:formState});
-  }
+  const handleSubmit = () => {
+    if (visibleAdd) {
+      navigate('/notes',{state:formState});
+    } else {
+      navigate('/notes',{state:formState});
+    }
+  };
+
+
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -111,9 +125,15 @@ export default function TaskForm() {
         variant="outlined"
         margin="normal"
       />
-      <Button variant="contained" color="primary" onClick={addNewTask}>
-        Add
-      </Button>
+      {visibleAdd ? (
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Add
+        </Button>
+      ) : (
+        <Button variant="contained" color="primary" onClick={handleSubmit}>
+          Edit
+        </Button>
+      )}
     </div>
   );
 }
