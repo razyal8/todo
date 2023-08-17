@@ -1,8 +1,7 @@
-#root{
+.App{
     display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    font-family: cursive;
-    background: linear-gradient(#d0dfe3, 70%, #584697);
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh; 
 }
+
