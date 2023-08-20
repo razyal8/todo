@@ -1,9 +1,13 @@
 import React from 'react';
 import '../assets/note-grid.css'
-import { Chip,Typography,CardContent,Card ,IconButton} from '@material-ui/core';
-import DoneSharpIcon from '@material-ui/icons/DoneSharp';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
+import Chip from '@mui/material/Chip';
+import Typography from '@mui/material/Typography';
+import CardContent from '@mui/material/CardContent';
+import Card from '@mui/material/Card';
+import IconButton from '@mui/material/IconButton';
+// import DoneIcon from '@mui/icons-material/Done';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -54,7 +58,7 @@ function NoteCard({ id, taskName, subject, priority, Description, Date, onDelete
           color={selected ? "primary" : "secondary"}
           variant={selected ? "default" : "outlined"}
           label={selected ? "Completed" : "Doing"}
-          deleteIcon={<DoneSharpIcon />}
+          deleteIcon={<DeleteIcon />}
         />
         <IconButton aria-label="delete" onClick={handleDelete}>
           <DeleteIcon />

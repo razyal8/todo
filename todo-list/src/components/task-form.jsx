@@ -1,6 +1,10 @@
 import * as React from 'react';
 import {useState,useEffect} from 'react';
-import { Typography,TextField,Button,MenuItem} from '@material-ui/core';
+import Typography from '@mui/material/Typography';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import MenuItem from '@mui/material/MenuItem';
+
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../assets/task-form.css';
 import { v4 as uuidv4 } from 'uuid';

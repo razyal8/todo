@@ -1,6 +1,6 @@
 import * as React from 'react';
 import NoteCard from './note-grid';
-import { Grid } from '@material-ui/core';
+import Grid from '@mui/material/Grid';
 import { useLocation , useNavigate} from 'react-router-dom'
 import { useState, useEffect  } from 'react'
 
