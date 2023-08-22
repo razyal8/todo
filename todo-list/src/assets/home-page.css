@@ -1,15 +1,16 @@
-/* .homepage{
+.homepage{
     text-align: center;
 }
 
 .title-homepage h1{
-    color:#ffdfdb;
+    color:#a1a9e7;
     font-size: 50px;
     
 }
 
 .form-homepage{
     display: flex;
+    justify-content: center;
 }
 
- */
+
